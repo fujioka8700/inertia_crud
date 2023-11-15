@@ -1,6 +1,9 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
+defineProps({
+    blogs: Array,
+});
 </script>
 
 <template>
@@ -19,6 +22,24 @@ import { Head, Link } from "@inertiajs/vue3";
                     <div class="p-6 text-gray-900">You're logged in!</div>
                 </div>
             </div>
+        </div>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="border px-4 py-2 bg-amber-100">タイトル</th>
+                        <th class="border px-4 py-2 bg-amber-100">
+                            コンテンツ
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="blog in blogs" :key="blog.id">
+                        <td class="border px-4 py-2">{{ blog.title }}</td>
+                        <td class="border px-4 py-2">{{ blog.content }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </AuthenticatedLayout>
 </template>
