@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import { Head, Link } from "@inertiajs/vue3";
 defineProps({
     blogs: Array,
 });
@@ -23,6 +24,15 @@ defineProps({
                 </div>
             </div>
         </div>
+
+        <div class="pb-3">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <Link :href="route('blog.create')">
+                    <PrimaryButton>Blogを作成</PrimaryButton>
+                </Link>
+            </div>
+        </div>
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <table>
                 <thead>
