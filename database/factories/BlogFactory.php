@@ -19,6 +19,7 @@ class BlogFactory extends Factory
         return [
             'title' => $this->faker->realText(20, 5),
             'content' => $this->faker->realText(100, 5),
+            'user_id' => \App\Models\User::find(1)->id,
         ];
     }
 }
