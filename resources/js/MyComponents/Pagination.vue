@@ -3,7 +3,9 @@
         <ul class="flex items-center -space-x-px h-8 text-sm">
             <li>
                 <Link
-                    :href="blogs.prev_page_url"
+                    :href="
+                        blogs.prev_page_url === null ? '#' : blogs.prev_page_url
+                    "
                     class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                     :class="{
                         disabled: blogs.current_page === blogs.from,
@@ -45,7 +47,9 @@
             </li>
             <li>
                 <Link
-                    :href="blogs.next_page_url"
+                    :href="
+                        blogs.next_page_url === null ? '#' : blogs.next_page_url
+                    "
                     class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                     :class="{
                         disabled: blogs.current_page === blogs.last_page,
