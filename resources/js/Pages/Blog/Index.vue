@@ -1,10 +1,15 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import DangerButton from "@/Components/DangerButton.vue";
 import { Head, Link } from "@inertiajs/vue3";
 defineProps({
     blogs: Array,
 });
+
+const deleteBlog = (id) => {
+    console.log(id);
+};
 </script>
 
 <template>
@@ -30,7 +35,7 @@ defineProps({
                 <thead>
                     <tr>
                         <th class="border px-4 py-2 bg-amber-100">タイトル</th>
-                        <th class="border px-4 py-2 bg-amber-100">
+                        <th class="border px-4 py-2 bg-amber-100" colspan="2">
                             コンテンツ
                         </th>
                     </tr>
@@ -39,6 +44,11 @@ defineProps({
                     <tr v-for="blog in blogs" :key="blog.id">
                         <td class="border px-4 py-2">{{ blog.title }}</td>
                         <td class="border px-4 py-2">{{ blog.content }}</td>
+                        <td class="border px-4 py-2">
+                            <DangerButton @click="deleteBlog(blog.id)"
+                                >削除</DangerButton
+                            >
+                        </td>
                     </tr>
                 </tbody>
             </table>
