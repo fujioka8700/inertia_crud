@@ -7,29 +7,33 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 
-const form = useForm({
-    title: "",
-    content: "",
+const props = defineProps({
+    blog: Object,
 });
 
-const submitted = () => {
-    form.post(route("blog.store"));
+const form = useForm({
+    title: props.blog.title,
+    content: props.blog.content,
+});
+
+const editBlog = () => {
+    form.patch(route("blog.update", props.blog.id));
 };
 </script>
 
 <template>
-    <Head title="Blog作成" />
+    <Head title="Blog更新" />
 
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Blog作成
+                Blog更新
             </h2>
-            <p>Blogの作成を行います</p>
+            <p>Blogの更新を行います</p>
         </template>
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <form @submit.prevent="submitted">
+            <form @submit.prevent="editBlog">
                 <InputLabel for="title">タイトル</InputLabel>
                 <TextField
                     v-model="form.title"
@@ -44,7 +48,7 @@ const submitted = () => {
                     id="content"
                 />
                 <InputError :message="form.errors.content"></InputError>
-                <PrimaryButton>作成</PrimaryButton>
+                <PrimaryButton>更新</PrimaryButton>
             </form>
         </div>
     </AuthenticatedLayout>

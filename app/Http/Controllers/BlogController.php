@@ -48,17 +48,19 @@ class BlogController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Blog $blog)
     {
-        //
+        return Inertia::render('Blog/Edit', ['blog' => $blog]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StorePostRequest $request, Blog $blog)
     {
-        //
+        $blog->update($request->input());
+
+        return redirect()->route('blog.index');
     }
 
     /**
