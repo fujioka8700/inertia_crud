@@ -37,10 +37,11 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('/blogs', BlogController::class)->middleware('auth')
-    ->only(['index', 'create'])
+    ->only(['index', 'create', 'store'])
     ->names([
         'index'  => 'blog.index',
         'create' => 'blog.create',
+        'store' => 'blog.store',
     ]);
 
 require __DIR__ . '/auth.php';

@@ -13,7 +13,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Blog/Index', ['blogs' => Blog::all()]);
+        $blogs = Blog::orderByDesc('id')->paginate(10)->items();
+
+        return Inertia::render('Blog/Index', ['blogs' => $blogs]);
     }
 
     /**
@@ -29,7 +31,11 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->input();
+
+        Blog::create($input);
+
+        return redirect()->route('blog.index');
     }
 
     /**

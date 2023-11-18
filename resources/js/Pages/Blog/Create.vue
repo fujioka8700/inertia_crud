@@ -12,7 +12,7 @@ const form = useForm({
 });
 
 const submitted = () => {
-    console.log("submitted");
+    form.post(route("blog.store"));
 };
 </script>
 
@@ -34,7 +34,6 @@ const submitted = () => {
                     v-model="form.title"
                     placeholder="タイトルを入力してください"
                     id="title"
-                    required
                 />
                 <InputLabel for="content">記事の内容</InputLabel>
                 <TextArea
