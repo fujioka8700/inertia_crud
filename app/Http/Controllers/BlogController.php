@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
 use Inertia\Inertia;
 
 class BlogController extends Controller
@@ -29,14 +30,9 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-        ]);
-
-        Blog::create($validated);
+        Blog::create($request->validated());
 
         return redirect()->route('blog.index');
     }

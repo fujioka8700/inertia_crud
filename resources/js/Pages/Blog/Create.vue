@@ -4,6 +4,7 @@ import TextField from "@/MyComponents/TextField.vue";
 import InputLabel from "@/MyComponents/InputLabel.vue";
 import TextArea from "@/MyComponents/TextArea.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import InputError from "@/Components/InputError.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 
 const form = useForm({
@@ -35,13 +36,14 @@ const submitted = () => {
                     placeholder="タイトルを入力してください"
                     id="title"
                 />
+                <InputError :message="form.errors.title"></InputError>
                 <InputLabel for="content">記事の内容</InputLabel>
                 <TextArea
                     v-model="form.content"
                     placeholder="記事の内容を入力してください"
                     id="content"
-                    required
                 />
+                <InputError :message="form.errors.content"></InputError>
                 <PrimaryButton>作成</PrimaryButton>
             </form>
         </div>
