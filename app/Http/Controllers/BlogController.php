@@ -6,6 +6,7 @@ use App\Models\Blog;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -32,7 +33,7 @@ class BlogController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        Blog::create($request->validated());
+        Auth::user()->blogs()->create($request->validated());
 
         return redirect()->route('blog.index');
     }
