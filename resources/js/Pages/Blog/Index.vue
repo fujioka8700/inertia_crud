@@ -2,13 +2,17 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import DangerButton from "@/Components/DangerButton.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 defineProps({
     blogs: Array,
 });
 
+const form = useForm({});
+
 const deleteBlog = (id) => {
-    console.log(id);
+    form.delete(route("blog.destroy", id), {
+        preserveScroll: true,
+    });
 };
 </script>
 
