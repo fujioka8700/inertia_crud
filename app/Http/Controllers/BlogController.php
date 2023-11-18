@@ -31,9 +31,12 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->input();
+        $validated = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
 
-        Blog::create($input);
+        Blog::create($validated);
 
         return redirect()->route('blog.index');
     }
