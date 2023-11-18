@@ -6,6 +6,7 @@ use App\Models\Blog;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -14,7 +15,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::orderByDesc('id')->paginate(10)->items();
+        $blogs = Auth::user()->blogs()->orderByDesc('id')->paginate(10);
 
         return Inertia::render('Blog/Index', ['blogs' => $blogs]);
     }
@@ -32,7 +33,7 @@ class BlogController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        Blog::create($request->validated());
+        Auth::user()->blogs()->create($request->validated());
 
         return redirect()->route('blog.index');
     }
@@ -48,24 +49,28 @@ class BlogController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Blog $blog)
     {
-        //
+        return Inertia::render('Blog/Edit', ['blog' => $blog]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StorePostRequest $request, Blog $blog)
     {
-        //
+        $blog->update($request->input());
+
+        return redirect()->route('blog.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Blog $blog)
     {
-        //
+        $blog->delete();
+
+        return redirect()->route('blog.index');
     }
 }

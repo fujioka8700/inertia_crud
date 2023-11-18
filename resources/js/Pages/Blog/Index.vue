@@ -1,19 +1,25 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 import DangerButton from "@/Components/DangerButton.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import Pagination from "@/MyComponents/Pagination.vue";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 defineProps({
-    blogs: Array,
+    blogs: Object,
 });
 
+const form = useForm({});
+
 const deleteBlog = (id) => {
-    console.log(id);
+    form.delete(route("blog.destroy", id), {
+        preserveScroll: true,
+    });
 };
 </script>
 
 <template>
-    <Head title="Blog" />
+    <Head title="Blog一覧" />
 
     <AuthenticatedLayout>
         <template #header>
@@ -35,15 +41,22 @@ const deleteBlog = (id) => {
                 <thead>
                     <tr>
                         <th class="border px-4 py-2 bg-amber-100">タイトル</th>
-                        <th class="border px-4 py-2 bg-amber-100" colspan="2">
+                        <th class="border px-4 py-2 bg-amber-100" colspan="3">
                             コンテンツ
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="blog in blogs" :key="blog.id">
+                    <tr v-for="blog in blogs.data" :key="blog.id">
                         <td class="border px-4 py-2">{{ blog.title }}</td>
                         <td class="border px-4 py-2">{{ blog.content }}</td>
+                        <td class="border px-4 py-2">
+                            <SecondaryButton>
+                                <Link :href="route('blog.edit', blog.id)"
+                                    >更新</Link
+                                >
+                            </SecondaryButton>
+                        </td>
                         <td class="border px-4 py-2">
                             <DangerButton @click="deleteBlog(blog.id)"
                                 >削除</DangerButton
@@ -52,6 +65,10 @@ const deleteBlog = (id) => {
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="my-5 flex justify-center">
+            <Pagination :blogs="blogs" />
         </div>
     </AuthenticatedLayout>
 </template>
