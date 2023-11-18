@@ -14,7 +14,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::orderByDesc('id')->paginate(10)->items();
+        $blogs = Blog::orderByDesc('id')->paginate(10);
 
         return Inertia::render('Blog/Index', ['blogs' => $blogs]);
     }

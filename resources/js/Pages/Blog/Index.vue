@@ -3,9 +3,10 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import DangerButton from "@/Components/DangerButton.vue";
+import Pagination from "@/MyComponents/Pagination.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 defineProps({
-    blogs: Array,
+    blogs: Object,
 });
 
 const form = useForm({});
@@ -46,7 +47,7 @@ const deleteBlog = (id) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="blog in blogs" :key="blog.id">
+                    <tr v-for="blog in blogs.data" :key="blog.id">
                         <td class="border px-4 py-2">{{ blog.title }}</td>
                         <td class="border px-4 py-2">{{ blog.content }}</td>
                         <td class="border px-4 py-2">
@@ -64,6 +65,10 @@ const deleteBlog = (id) => {
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="my-5 flex justify-center">
+            <Pagination :blogs="blogs" />
         </div>
     </AuthenticatedLayout>
 </template>
