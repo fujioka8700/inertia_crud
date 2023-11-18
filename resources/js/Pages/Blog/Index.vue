@@ -1,9 +1,15 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import DangerButton from "@/Components/DangerButton.vue";
+import { Head, Link } from "@inertiajs/vue3";
 defineProps({
     blogs: Array,
 });
+
+const deleteBlog = (id) => {
+    console.log(id);
+};
 </script>
 
 <template>
@@ -16,19 +22,20 @@ defineProps({
             </h2>
         </template>
 
-        <div class="py-12">
+        <div class="py-5">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">You're logged in!</div>
-                </div>
+                <Link :href="route('blog.create')">
+                    <PrimaryButton>Blogを作成</PrimaryButton>
+                </Link>
             </div>
         </div>
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <table>
                 <thead>
                     <tr>
                         <th class="border px-4 py-2 bg-amber-100">タイトル</th>
-                        <th class="border px-4 py-2 bg-amber-100">
+                        <th class="border px-4 py-2 bg-amber-100" colspan="2">
                             コンテンツ
                         </th>
                     </tr>
@@ -37,6 +44,11 @@ defineProps({
                     <tr v-for="blog in blogs" :key="blog.id">
                         <td class="border px-4 py-2">{{ blog.title }}</td>
                         <td class="border px-4 py-2">{{ blog.content }}</td>
+                        <td class="border px-4 py-2">
+                            <DangerButton @click="deleteBlog(blog.id)"
+                                >削除</DangerButton
+                            >
+                        </td>
                     </tr>
                 </tbody>
             </table>

@@ -36,6 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('/blogs', BlogController::class)->middleware('auth')->only(['index']);
+Route::resource('/blogs', BlogController::class)->middleware('auth')
+    ->only(['index', 'create', 'store'])
+    ->names([
+        'index'  => 'blog.index',
+        'create' => 'blog.create',
+        'store' => 'blog.store',
+    ]);
 
 require __DIR__ . '/auth.php';

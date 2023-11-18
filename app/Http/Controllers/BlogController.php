@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
 use Inertia\Inertia;
 
 class BlogController extends Controller
@@ -13,7 +14,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Blog/Index', ['blogs' => Blog::all()]);
+        $blogs = Blog::orderByDesc('id')->paginate(10)->items();
+
+        return Inertia::render('Blog/Index', ['blogs' => $blogs]);
     }
 
     /**
@@ -21,15 +24,17 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Blog/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
+        Blog::create($request->validated());
+
+        return redirect()->route('blog.index');
     }
 
     /**
