@@ -1,31 +1,18 @@
-export type Email = {
-    from: string;
-    to: string;
-    title: string;
-    subject: string;
+const oneSecond = 1000;
+const timer = {
+    message: "時間です！",
+    start: function () {
+        console.log(this); // ❶
+
+        // 従来の関数
+        setTimeout(function () {
+            console.log(this.message); // ❷
+        }, oneSecond);
+
+        // アロー関数
+        setTimeout(() => {
+            console.log(this.message); // ❸
+        }, oneSecond);
+    },
 };
-
-const isEmail = (value: unknown): value is Email => {
-    if (typeof value !== "object" || value === null) {
-        return false;
-    }
-    return true;
-};
-
-const email: Email = {
-    from: "私",
-    to: "あなた",
-    title: "タイトル",
-    subject: "サブジェクト",
-};
-
-const test = (params: unknown) => {
-    if (isEmail(params)) {
-        console.log("OK: ", params);
-        return;
-    }
-
-    console.log("NG: ", params);
-};
-
-test(email);
+timer.start();
