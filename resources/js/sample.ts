@@ -1,8 +1,31 @@
-const oneToFive = [1, 2, 3, 4, 5];
-const [one, ...rest] = oneToFive;
+export type Email = {
+    from: string;
+    to: string;
+    title: string;
+    subject: string;
+};
 
-console.log(one);
-// 1
+const isEmail = (value: unknown): value is Email => {
+    if (typeof value !== "object" || value === null) {
+        return false;
+    }
+    return true;
+};
 
-console.log(rest);
-// [ 2, 3, 4, 5 ]
+const email: Email = {
+    from: "私",
+    to: "あなた",
+    title: "タイトル",
+    subject: "サブジェクト",
+};
+
+const test = (params: unknown) => {
+    if (isEmail(params)) {
+        console.log("OK: ", params);
+        return;
+    }
+
+    console.log("NG: ", params);
+};
+
+test(email);
