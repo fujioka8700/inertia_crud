@@ -1,30 +1,34 @@
-class Male {
-    public name: string;
+interface Cat {
+    type: "cat";
+    sound: "meow";
+}
 
-    public constructor(name: string) {
-        this.name = name;
-    }
+interface Dog {
+    type: "dog";
+    sound: "woof";
+}
 
-    public toString(): string {
-        // return "hello";
-        return `Monsieur ${this.name}`;
+function isCat(animal: Cat | Dog): animal is Cat {
+    return animal.type === "cat";
+}
+
+function makeSoundWithGuard(animal: Cat | Dog) {
+    if (isCat(animal)) {
+        console.log(animal.sound); // 出力結果: meow
+    } else {
+        console.log(animal.sound); // 出力結果: woof
     }
 }
 
-class Female {
-    private name: string;
+const cat: Cat = {
+    type: "cat",
+    sound: "meow",
+};
 
-    public constructor(name: string) {
-        this.name = name;
-    }
+const dog: Dog = {
+    type: "dog",
+    sound: "woof",
+};
 
-    public toString(this: Female): string {
-        return `Madame ${this.name}`;
-    }
-}
-
-let male: Male = new Male("Frédéric");
-const female: Female = new Female("Frédérique");
-
-let maleToStr: () => string = male.toString;
-const femaleToStr: (this: Female) => string = female.toString;
+makeSoundWithGuard(cat);
+makeSoundWithGuard(dog);
