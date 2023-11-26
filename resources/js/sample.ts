@@ -1,18 +1,30 @@
-const oneSecond = 1000;
-const timer = {
-    message: "時間です！",
-    start: function () {
-        console.log(this); // ❶
+class Male {
+    public name: string;
 
-        // 従来の関数
-        setTimeout(function () {
-            console.log(this.message); // ❷
-        }, oneSecond);
+    public constructor(name: string) {
+        this.name = name;
+    }
 
-        // アロー関数
-        setTimeout(() => {
-            console.log(this.message); // ❸
-        }, oneSecond);
-    },
-};
-timer.start();
+    public toString(): string {
+        // return "hello";
+        return `Monsieur ${this.name}`;
+    }
+}
+
+class Female {
+    private name: string;
+
+    public constructor(name: string) {
+        this.name = name;
+    }
+
+    public toString(this: Female): string {
+        return `Madame ${this.name}`;
+    }
+}
+
+let male: Male = new Male("Frédéric");
+const female: Female = new Female("Frédérique");
+
+let maleToStr: () => string = male.toString;
+const femaleToStr: (this: Female) => string = female.toString;
