@@ -1,20 +1,26 @@
-class Point {
-    protected x: number = 0;
-    y: number = 0;
-
-    getX() {
-        return this.x;
+// example.ts
+class ConstructorInAccessModifier {
+    constructor(
+        arg0: number,
+        public arg1: number,
+        protected arg2: number,
+        private arg3: number
+    ) {
+        console.log({ arg0, arg1, arg2, arg3 });
     }
 }
 
-class PointX extends Point {
-    getPointX() {
-        return this.x;
+class ConstructorOutAccessModifier {
+    public arg1: number;
+    protected arg2: number;
+    private arg3: number;
+    constructor(arg0: number, arg1: number, arg2: number, arg3: number) {
+        this.arg1 = arg1;
+        this.arg2 = arg2;
+        this.arg3 = arg3;
+        console.log({ arg0, arg1, arg2, arg3 });
     }
 }
 
-const point = new PointX();
-// console.log(point.x, point.y);
-// 0 0
-
-console.log(point.getX());
+const obj = new ConstructorInAccessModifier(1, 2, 3, 4);
+const obj2 = new ConstructorOutAccessModifier(10, 20, 30, 40);
