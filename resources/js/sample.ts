@@ -1,9 +1,8 @@
-type MyObject = { key: string };
-const myObject: MyObject = { key: "" };
-myObject.key = "value"; // プロパティを追加
-
-class MyClass {}
-MyClass.key = "value"; // プロパティを追加
-
-myObject.key = "100";
-console.log(myObject.key);
+// Typescript
+class SomeClass {
+    static field: number = 123;
+}
+console.log(SomeClass.field);
+// 123
+SomeClass.key = 100;
+console.log(SomeClass.key);
