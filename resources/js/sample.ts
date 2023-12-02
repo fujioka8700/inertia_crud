@@ -1,16 +1,9 @@
-class Octopus {
-    readonly name: string;
-    readonly legs = 8; // フィールド初期化子での代入はOK
+type MyObject = { key: string };
+const myObject: MyObject = { key: "" };
+myObject.key = "value"; // プロパティを追加
 
-    constructor() {
-        this.name = "たこちゃん"; // コンストラクターでの代入はOK
-    }
+class MyClass {}
+MyClass.key = "value"; // プロパティを追加
 
-    setName(newName: string) {
-        this.name = newName;
-    }
-}
-
-const oct: Octopus = new Octopus();
-oct.setName("新しいたこちゃん");
-console.log(oct.name);
+myObject.key = "100";
+console.log(myObject.key);
