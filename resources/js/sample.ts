@@ -1,8 +1,7 @@
-class Greeter {
-    greet(name: string): string {
-        return `Hello, ${name}!`;
-    }
+class Point {
+    x: number = 0;
+    y: number = 0;
 }
-
-const greeter: Greeter = new Greeter();
-console.log(greeter.greet("Taro"));
+const point = new Point();
+console.log(point.x, point.y);
+// 0 0
