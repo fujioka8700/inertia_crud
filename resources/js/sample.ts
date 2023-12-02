@@ -1,6 +1,6 @@
 // Typescript
 class SomeClass {
-    static field: number = 123;
+    static field = 123;
 }
 console.log(SomeClass.field);
 // 123
