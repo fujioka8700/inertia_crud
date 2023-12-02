@@ -1,14 +1,20 @@
-console.log("1");
+// 1秒後に値を返す
+function request(): Promise<string> {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("hello");
+        }, 1000);
+    });
+}
 
-Promise.resolve().then(() => {
-    console.log("2");
-});
+// この書き方はできない
+// const result = await request();
+// console.log(result);
 
-console.log("3");
+async function main() {
+    const result = await request();
+    console.log(result);
+    // @log: "hello"
+}
 
-new Promise(() => {
-    console.log("4");
-    setTimeout(() => {
-        console.log("5");
-    }, 500);
-});
+main();
