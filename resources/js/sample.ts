@@ -1,9 +1,13 @@
+// TypeScript
 class Person {
-    constructor(name: string) {
-        console.log(name);
+    public name: string;
+
+    constructor() {
+        this.name = "";
     }
 }
+const alice = new Person();
+console.log(alice.name);
 
-const person: Person = new Person("Jon");
-
-console.log(person);
+alice.name = "Alice";
+console.log(alice.name);
