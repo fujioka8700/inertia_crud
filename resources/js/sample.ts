@@ -1,13 +1,8 @@
-// TypeScript
-class Person {
-    public name: string;
-
-    constructor() {
-        this.name = "";
+class Greeter {
+    greet(name: string): string {
+        return `Hello, ${name}!`;
     }
 }
-const alice = new Person();
-console.log(alice.name);
 
-alice.name = "Alice";
-console.log(alice.name);
+const greeter: Greeter = new Greeter();
+console.log(greeter.greet("Taro"));
