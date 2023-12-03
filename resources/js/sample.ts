@@ -1,12 +1,13 @@
-class Parent {
-    constructor() {
-        console.log("This is Parent.");
-    }
-}
-class Child extends Parent {
-    constructor() {
-        super();
-    }
-}
+class ClassA {}
+class ClassB extends ClassA {}
+const a = new ClassA();
+console.log(a instanceof ClassA);
+// true
 
-new Child();
+console.log(a instanceof ClassB);
+// false
+
+const b: ClassB = new ClassB();
+
+console.log(b instanceof ClassA); // true
+console.log(b instanceof ClassB); // true
