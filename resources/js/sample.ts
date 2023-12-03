@@ -1,19 +1,14 @@
-class UserId {
-    private readonly id: string;
-
-    constructor(id: string) {
-        this.id = id;
+abstract class Food {
+    constructor(protected name: string, protected calorie: number) {}
+    showDebug() {
+        console.log(`name = ${this.name} `);
+        console.log(`calorie = ${this.calorie}kcal `);
     }
+    abstract keepRefrigerated(): boolean;
 }
 
-class GroupId {
-    private readonly id: string;
-
-    constructor(id: string) {
-        this.id = id;
+class Meat extends Food {
+    keepRefrigerated(): boolean {
+        return true;
     }
 }
-
-const userId: UserId = new GroupId("...");
-// Type 'GroupId' is not assignable to type 'UserId'.
-//   Types have separate declarations of a private property 'id'.
