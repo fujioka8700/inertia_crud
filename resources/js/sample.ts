@@ -1,6 +1,6 @@
 // TypeScript
 class SomeClass {
-    static doSomething() {
+    private static doSomething() {
         console.log("doSomething");
     }
 }
