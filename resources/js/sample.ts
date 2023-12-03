@@ -1,8 +1,8 @@
-// Typescript
+// TypeScript
 class SomeClass {
-    static field = 123;
+    static doSomething() {
+        console.log("doSomething");
+    }
 }
-console.log(SomeClass.field);
-// 123
-SomeClass.key = 100;
-console.log(SomeClass.key);
+
+SomeClass.doSomething();
