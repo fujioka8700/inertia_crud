@@ -2,11 +2,21 @@ interface Human {
     think(): void;
 }
 
-class Developer implements Human {
+interface Programmer {
+    writeCode(): void;
+}
+
+class TypeScriptProgrammer implements Human, Programmer {
     think(): void {
-        console.log("どういう実装にしようかな〜");
+        console.log("どういうコードにしようかな〜");
+    }
+
+    writeCode(): void {
+        console.log("カタカタ");
     }
 }
 
-const obj: Developer = new Developer();
+const obj: TypeScriptProgrammer = new TypeScriptProgrammer();
+
 obj.think();
+obj.writeCode();
