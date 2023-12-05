@@ -1,14 +1,12 @@
-abstract class Food {
-    constructor(protected name: string, protected calorie: number) {}
-    showDebug() {
-        console.log(`name = ${this.name} `);
-        console.log(`calorie = ${this.calorie}kcal `);
-    }
-    abstract keepRefrigerated(): boolean;
+interface Human {
+    think(): void;
 }
 
-class Meat extends Food {
-    keepRefrigerated(): boolean {
-        return true;
+class Developer implements Human {
+    think(): void {
+        console.log("どういう実装にしようかな〜");
     }
 }
+
+const obj: Developer = new Developer();
+obj.think();
